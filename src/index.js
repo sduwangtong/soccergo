@@ -10,15 +10,19 @@ import requireAuth from './components/require_authentication'
 
 import { Provider } from 'react-redux';
 import reducers from './reducers';
-import Asyn from './middlewares/async';
-import { createStore, applyMiddleware } from 'redux';
+//import Asyn from './middlewares/async';
+import reduxThunk from 'redux-thunk';
 
-const createStoreWithMiddleware = applyMiddleware(Asyn)(createStore);
+import { createStore, applyMiddleware } from 'redux';
+import Signin from './components/auth/signin';
+
+const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
     <Router history={browserHistory}>
       <Route path="/" component={App}>
+        <Route path="signin" component={Signin} />
         <Route path="resources" component={requireAuth(Resources)} />
       </Route>
     </Router>

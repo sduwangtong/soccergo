@@ -24,6 +24,9 @@ class Header extends Component {
           <li className="nav-item">
             {this.authButton()}
           </li>
+          <li className="nav-item">
+            <Link to="/signin"> Signin </Link>
+          </li>
         </ul>
 
        </nav>
@@ -33,7 +36,7 @@ class Header extends Component {
 }
 
 function mapStateToProps(state) {
-  return {authenticated: state.authenticated};
+  return {authenticated: state.authentication.authenticated};
 }
 
 export default connect(mapStateToProps, actions) (Header);
