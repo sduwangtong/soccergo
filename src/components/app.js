@@ -10,10 +10,7 @@ export default class App extends Component {
         {/*Marking sure APP has children from router, app is responsible for showing it */}
         {this.props.children}
         {/*<UserList />*/}
-        <div> Please Login</div>
-
       </div>
-
     );
   }
 }

@@ -6,9 +6,18 @@ import * as actions from '../actions';
 class Header extends Component {
   authButton() {
     if (this.props.authenticated) {
-      return <button onClick={() => this.props.authenticate(false)}>Sign out</button>
+      return <li className="nav-item">
+        <Link className="nav-link" to="/signout">Sign Out</Link>
+      </li>
     }
-    return <button onClick={() => this.props.authenticate(true)}>Sign in</button>
+    return [
+    <li className="nav-item" key={1}>
+      <Link className="nav-link" to="/signin">Sign In</Link>
+    </li>,
+    <li className="nav-item" key={2}>
+      <Link className="nav-link" to="/signup">Sign Up</Link>
+    </li>
+    ]
   }
 
   render() {
@@ -16,17 +25,12 @@ class Header extends Component {
       <nav className="navbar navbar-light" >
         <ul className="nav navbar-nav">
           <li className="nav-item">
-            <Link to="/"> HOME</Link>
+            <Link className="nav-link" to="/"> HOME</Link>
           </li>
           <li className="nav-item">
-            <Link to="/resources"> Resources </Link>
+            <Link className="nav-link" to="/resources"> Resources </Link>
           </li>
-          <li className="nav-item">
-            {this.authButton()}
-          </li>
-          <li className="nav-item">
-            <Link to="/signin"> Signin </Link>
-          </li>
+          {this.authButton()}
         </ul>
 
        </nav>

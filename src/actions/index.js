@@ -1,4 +1,4 @@
-import {SAVE_COMMENT, CHANGE_AUTH, FETCH_USERS, AUTH_USER, AUTH_ERROR} from './types';
+import {SAVE_COMMENT, FETCH_USERS, AUTH_USER, AUTH_ERROR, UNAUTH_USER} from './types';
 import axios from 'axios';
 import {browserHistory} from 'react-router';
 
@@ -41,6 +41,11 @@ export function signinUser({email, password}) {
   }
 }
 
+export function signoutUser() {
+  localStorage.removeItem('token');
+
+  return {type : UNAUTH_USER};
+}
 
 export function authError(error) {
   return {

@@ -15,6 +15,8 @@ import reduxThunk from 'redux-thunk';
 
 import { createStore, applyMiddleware } from 'redux';
 import Signin from './components/auth/signin';
+import Signout from './components/auth/signout';
+import Signup from './components/auth/signup';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 
@@ -24,6 +26,8 @@ ReactDOM.render(
       <Route path="/" component={App}>
         <Route path="signin" component={Signin} />
         <Route path="resources" component={requireAuth(Resources)} />
+        <Route path="signout" component={Signout} />
+        <Route path="signup" component={Signup} />
       </Route>
     </Router>
   </Provider>
