@@ -41,6 +41,22 @@ export function signinUser({email, password}) {
   }
 }
 
+export function signupUser({email, password}) {
+  return function(dispatch) {
+    axios.post(`${ROOT_URL}/signup`, {email, password})
+    .then(response => {
+      dispatch({type : AUTH_USER});
+      // save the JwtlocalStorage
+      localStorage.setItem('token', response.data.token);
+      browserHistory.push('/resources');
+    })
+    .catch((response) => {
+      // TODO add response.data.error to authError();
+      dispatch(authError('something wrong, please try again with differe username'));
+    });
+  }
+}
+
 export function signoutUser() {
   localStorage.removeItem('token');
 

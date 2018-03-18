@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 
 class Signup extends Component {
   handleFormSubmit({email, password}) {
+    this.props.signupUser({email, password});
   }
 
   render() {
@@ -15,6 +16,6 @@ class Signup extends Component {
 }
 
 function mapStateToProps(state){
-  return {signUpError : state.authentication.signUpError};
+  return {signUpError : state.authentication.error};
 }
 export default connect(mapStateToProps, actions) (Signup);

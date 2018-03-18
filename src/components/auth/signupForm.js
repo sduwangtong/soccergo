@@ -19,6 +19,8 @@ const validate = values => {
   return errors
 }
 
+
+
 const renderField = ({ input, label, type, meta: { touched, error, warning } }) => (
   <div>
     <label>{label}</label>
@@ -30,12 +32,12 @@ const renderField = ({ input, label, type, meta: { touched, error, warning } }) 
 )
 
 let SignupForm = props => {
-  const {handleSubmit, loginError} = props;
+  const {handleSubmit, signUpError} = props;
   let errorBlock;
-  if (loginError) {
+  if (signUpError) {
     errorBlock =
     <div className="alert alert-danger">
-      <strong> Opps! </strong> {loginError}
+      <strong> Opps! </strong> {signUpError}
     </div>;
   }
 
