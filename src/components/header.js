@@ -20,6 +20,14 @@ class Header extends Component {
     ]
   }
 
+  resourceMenu() {
+    if(this.props.authenticated) {
+      return <li className="nav-item">
+        <Link className="nav-link" to="/resources"> Resources </Link>
+      </li>
+    }
+  }
+
   render() {
     return(
       <nav className="navbar navbar-light" >
@@ -27,9 +35,7 @@ class Header extends Component {
           <li className="nav-item">
             <Link className="nav-link" to="/"> HOME</Link>
           </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/resources"> Resources </Link>
-          </li>
+          {this.resourceMenu()}
           {this.authButton()}
         </ul>
 

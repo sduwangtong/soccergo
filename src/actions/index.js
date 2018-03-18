@@ -1,4 +1,4 @@
-import {SAVE_COMMENT, FETCH_USERS, AUTH_USER, AUTH_ERROR, UNAUTH_USER} from './types';
+import {SAVE_COMMENT, FETCH_USERS, AUTH_USER, AUTH_ERROR, UNAUTH_USER, FETCH_REG_USERS} from './types';
 import axios from 'axios';
 import {browserHistory} from 'react-router';
 
@@ -67,5 +67,21 @@ export function authError(error) {
   return {
     type : AUTH_ERROR,
     payload: error
+  }
+}
+
+export function fetchRegisteredUsers() {
+  return function(dispatch) {
+    axios.get(ROOT_URL, {
+      headers : {
+        authorization : localStorage.getItem('token')
+      }
+    })
+    .then(response =>{
+      dispatch({
+        type : FETCH_REG_USERS,
+        payload : response.data.message
+      });
+    });
   }
 }

@@ -1,15 +1,31 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import * as actions from '../actions';
 
-const CommentList = (props) => {
-  const list = props.comments.map(comment => <li key={comment}> {comment}</li>);
-  return (
-    <ul className="comment-list">{list}</ul>
-  );
+class CommentList extends Component {
+  componentWillMount() {
+    this.props.fetchRegisteredUsers();
+  }
+
+  errorMessage () {
+    return <div>  {this.props.message} </div>;
+  }
+  render() {
+    const list = this.props.comments.map(comment => <li key={comment}> {comment}</li>);
+    return (
+      <ul className="comment-list">
+        {list}
+        {this.errorMessage()}
+      </ul>
+    );
+  }
 }
 
 function mapStateToProps(state) {
-  return {comments : state.comments};
+  return {
+    comments : state.comments,
+    message : state.message
+  };
 }
 
-export default connect(mapStateToProps)(CommentList);
+export default connect(mapStateToProps,actions)(CommentList);

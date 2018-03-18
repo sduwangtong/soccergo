@@ -4,7 +4,7 @@ import CommentList from './comment_list';
 
 export default () => {
   return (
-    <div>Secret
+    <div>
     <CommentBox />
     <CommentList />
     </div>
