@@ -3,8 +3,8 @@ import {connect} from 'react-redux';
 import * as actions from '../actions';
 
 class CommentList extends Component {
-  componentWillMount() {
-    this.props.fetchRegisteredUsers();
+  componentDidMount() {
+    this.props.fetchMatches();
   }
 
   errorMessage () {
@@ -24,7 +24,8 @@ class CommentList extends Component {
 function mapStateToProps(state) {
   return {
     comments : state.comments,
-    message : state.message
+    message : state.message,
+    matches : state.matches
   };
 }
 
