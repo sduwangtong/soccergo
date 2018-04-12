@@ -12,11 +12,18 @@ class CommentList extends Component {
   }
   render() {
     const list = this.props.comments.map(comment => <li key={comment}> {comment}</li>);
+    console.log(this.props.matches);
+    const matches = this.props.matches.map(match => <option value={match._id}> {match.name} </option>);
     return (
-      <ul className="comment-list">
-        {list}
-        {this.errorMessage()}
-      </ul>
+      <div>
+        <ul className="comment-list">
+          {list}
+          {this.errorMessage()}
+        </ul>
+        <select>
+          {matches}
+        </select>
+      </div>
     );
   }
 }
