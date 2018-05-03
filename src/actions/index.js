@@ -1,4 +1,4 @@
-import {SAVE_COMMENT, FETCH_USERS, AUTH_USER, AUTH_ERROR, UNAUTH_USER, FETCH_MATCHES} from './types';
+import {SAVE_COMMENT, FETCH_USERS, AUTH_USER, AUTH_ERROR, UNAUTH_USER, FETCH_MATCHES, UPDATE_MATCH} from './types';
 import axios from 'axios';
 import {browserHistory} from 'react-router';
 
@@ -37,6 +37,22 @@ export function signinUser({email, password}) {
     .catch(() => {
       // if request is bad, show error
       dispatch(authError('Bad Login'));
+    })
+  }
+}
+
+export function updateMatch(id, name) {
+  return function (dispatch) {
+    axios.post(`${ROOT_URL}/updateMatch`, {
+      id :id,
+      name: name
+    })
+    .then(response => {
+      dispatch({type : UPDATE_MATCH});
+    })
+    .catch(() => {
+      // if request is bad, show error
+      dispatch(authError('cant update'));
     })
   }
 }

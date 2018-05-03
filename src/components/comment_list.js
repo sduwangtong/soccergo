@@ -5,15 +5,23 @@ import * as actions from '../actions';
 class CommentList extends Component {
   constructor(props) {
     super(props);
-    this.state = { selectMatch: '' };
+    this.state = {
+      selectMatch: '',
+      name: ''
+   };
     this.handleChange = this.handleChange.bind(this);
     this.getMatchDetails = this.getMatchDetails.bind(this);
+    this.handleNameChange = this.handleNameChange.bind(this);
+    this.addToMatch = this.addToMatch.bind(this);
   }
   componentDidMount() {
     this.props.fetchMatches();
   }
   handleChange (e){
-    this.setState({selectMatch:e.target.value});
+    this.setState({
+      selectMatch:e.target.value,
+      name:this.state.name
+    });
   };
 
 
@@ -21,7 +29,7 @@ class CommentList extends Component {
     return <div>  {this.props.message} </div>;
   }
 
-   getMatchDetails () {
+ getMatchDetails () {
     const selected = this.state.selectMatch;
     const match = this.props.matches.find(function (obj) { return obj._id === selected; });
 
@@ -30,6 +38,21 @@ class CommentList extends Component {
     }
     return null;
   }
+
+
+  handleNameChange (event){
+    this.setState({
+      selectMatch: this.state.selectMatch,
+      name:event.target.value
+    });
+  };
+
+  addToMatch(event) {
+    event.preventDefault();
+    this.props.updateMatch(this.state.selectMatch, this.state.name);
+  }
+
+
 
   render() {
     const list = this.props.comments.map(comment => <li key={comment}> {comment}</li>);
@@ -50,6 +73,10 @@ class CommentList extends Component {
         <ul>
           { this.getMatchDetails() }
         </ul>
+        <form onSubmit={this.addToMatch}>
+          <textarea onChange={this.handleNameChange} value={this.state.name} > </textarea>
+          <button action="submit">I am in</button>
+        </form>
       </div>
     );
   }
